@@ -1,22 +1,11 @@
-<!DOCTYPE html>
+<!DOCTYPE html><!DOCTYPE html>
 <html lang="en" class="dark">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>OmniStudio AI v3.0 - Ultimate Universal Editor</title>
-  <!-- Tailwind CSS CDN -->
+  <title>OmniStudio AI v3.0</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <script>
-    tailwind.config = {
-      darkMode: 'class',
-      theme: {
-        extend: {
-          colors: { brand: { 500: '#6366f1', 600: '#4f46e5', 700: '#4338ca' } }
-        }
-      }
-    }
-  </script>
   <style>
     ::-webkit-scrollbar { width: 6px; height: 6px; }
     ::-webkit-scrollbar-track { background: #121214; }
@@ -30,10 +19,8 @@
   <header class="h-14 bg-zinc-900 border-b border-zinc-800 flex items-center justify-between px-4 z-20 shrink-0">
     <div class="flex items-center gap-3">
       <div class="flex items-center gap-2 text-indigo-500 font-bold text-lg tracking-wider">
-        <i class="fa-solid fa-clapperboard"></i> OMNISTUDIO <span class="text-[10px] font-mono bg-indigo-500/20 text-indigo-400 border border-indigo-500/30 px-2 py-0.5 rounded-full">v3.0-ULTIMATE</span>
+        <i class="fa-solid fa-clapperboard"></i> OMNISTUDIO <span class="text-[10px] font-mono bg-indigo-500/20 text-indigo-400 border border-indigo-500/30 px-2 py-0.5 rounded-full">v3.0</span>
       </div>
-      <span class="text-zinc-700">|</span>
-      <input type="text" id="project-name" value="Master Reel 2026" class="bg-transparent text-sm font-medium hover:bg-zinc-800 focus:bg-zinc-800 px-2 py-1 rounded text-zinc-300 focus:outline-none transition border border-transparent focus:border-zinc-700">
     </div>
 
     <!-- LANGUAGE SELECTOR & ACTIONS -->
@@ -43,19 +30,9 @@
         <select id="lang-select" onchange="changeLanguage(this.value)" class="bg-transparent text-zinc-200 focus:outline-none cursor-pointer">
           <option value="en" selected>English</option>
           <option value="te">తెలుగు (Telugu)</option>
-          <option value="es">Español</option>
-          <option value="fr">Français</option>
-          <option value="de">Deutsch</option>
-          <option value="zh">中文</option>
-          <option value="ja">日本語</option>
         </select>
       </div>
-
-      <button onclick="openTutorialModal()" class="bg-zinc-800 hover:bg-zinc-700 border border-zinc-700 text-indigo-400 px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition">
-        <i class="fa-solid fa-graduation-cap"></i> <span id="ui-tut">Guide</span>
-      </button>
-
-      <button onclick="openExportModal()" class="bg-gradient-to-r from-indigo-600 to-purple-600 text-white px-4 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition shadow-lg">
+      <button onclick="openExportModal()" class="bg-indigo-600 text-white px-4 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 shadow-lg">
         <i class="fa-solid fa-file-export"></i> <span id="ui-render">Render 4K</span>
       </button>
     </div>
@@ -68,8 +45,6 @@
     <div class="w-16 bg-zinc-900 border-r border-zinc-800 flex flex-col items-center py-4 gap-6 shrink-0">
       <button onclick="switchTab('media')" id="tab-media" class="sidebar-tab text-indigo-500 flex flex-col items-center gap-1 text-[10px] font-medium"><i class="fa-solid fa-folder-open text-lg"></i> <span id="nav-media">Media</span></button>
       <button onclick="switchTab('text')" id="tab-text" class="sidebar-tab text-zinc-500 flex flex-col items-center gap-1 text-[10px] font-medium"><i class="fa-solid fa-font text-lg"></i> <span id="nav-text">Text</span></button>
-      <button onclick="switchTab('transitions')" id="tab-transitions" class="sidebar-tab text-zinc-500 flex flex-col items-center gap-1 text-[10px] font-medium"><i class="fa-solid fa-shuffle text-lg"></i> <span id="nav-trans">FX</span></button>
-      <button onclick="switchTab('ai')" id="tab-ai" class="sidebar-tab text-zinc-500 flex flex-col items-center gap-1 text-[10px] font-medium"><i class="fa-solid fa-brain text-lg text-purple-400"></i> <span id="nav-ai">AI</span></button>
     </div>
 
     <!-- TAB PANELS -->
@@ -89,23 +64,8 @@
       <!-- TEXT -->
       <div id="panel-text" class="tab-panel hidden space-y-3">
         <h3 id="lbl-typography" class="text-xs font-semibold text-zinc-400 uppercase tracking-wider">Kinetic Typography</h3>
-        <button onclick="addTextClip('Typewriter Reveal', 'typewriter')" class="w-full bg-zinc-800 p-2.5 rounded-lg text-left text-xs font-semibold text-zinc-200">Typewriter Effect</button>
-        <button onclick="addTextClip('Neon Glow', 'breathe')" class="w-full bg-zinc-800 p-2.5 rounded-lg text-left text-xs font-semibold text-purple-400">Neon Breathe</button>
-      </div>
-
-      <!-- TRANSITIONS -->
-      <div id="panel-transitions" class="tab-panel hidden space-y-4">
-        <h3 id="lbl-transit" class="text-xs font-semibold text-zinc-400 uppercase tracking-wider">Transitions & Filters</h3>
-        <div class="grid grid-cols-2 gap-2">
-          <button onclick="applyFx('blur')" class="bg-zinc-800 p-2 rounded text-xs">Gaussian Blur</button>
-          <button onclick="applyFx('glitch')" class="bg-zinc-800 p-2 rounded text-xs">RGB Glitch</button>
-        </div>
-      </div>
-
-      <!-- AI -->
-      <div id="panel-ai" class="tab-panel hidden space-y-4">
-        <h3 class="text-xs font-semibold text-purple-400 uppercase tracking-wider">Omni AI Suite</h3>
-        <button onclick="alert('AI Subtitles Generated Successfully!')" class="w-full bg-purple-900/40 border border-purple-500/40 p-2.5 rounded text-xs text-purple-300">Auto Captions (Telugu/English)</button>
+        <button onclick="addTextClip('Typewriter Reveal', 'typewriter')" class="w-full bg-zinc-800 hover:bg-zinc-700 p-2.5 rounded-lg text-left text-xs font-semibold text-zinc-200">Typewriter Effect</button>
+        <button onclick="addTextClip('Neon Glow', 'breathe')" class="w-full bg-zinc-800 hover:bg-zinc-700 p-2.5 rounded-lg text-left text-xs font-semibold text-purple-400">Neon Breathe</button>
       </div>
 
     </div>
@@ -121,9 +81,9 @@
 
       <!-- PLAYBACK TOOLBAR -->
       <div class="h-12 bg-zinc-900 border-t border-zinc-800 flex items-center justify-between px-6 shrink-0">
-        <div class="text-xs font-mono text-zinc-400"><span id="current-time-display">00:00</span></div>
+        <div class="text-xs font-mono text-zinc-400"><span>00:00</span></div>
         <button onclick="togglePlayPause()" id="play-btn" class="w-8 h-8 rounded-full bg-indigo-600 text-white flex items-center justify-center text-xs"><i class="fa-solid fa-play"></i></button>
-        <div class="text-xs text-zinc-500">v3.0 Legacy Compatible</div>
+        <div class="text-xs text-zinc-500">v3.0-ULTIMATE</div>
       </div>
     </div>
 
@@ -153,32 +113,22 @@
   </div>
 
   <script>
-    // --- MULTI-LANGUAGE DICTIONARY (INCLUDING TELUGU) ---
     const translations = {
-      en: { tut: "Guide", render: "Render 4K", assets: "Project Assets", upload: "Import Local Media", typography: "Kinetic Typography", transit: "Transitions & Filters", inspector: "Inspector", timeline: "Multi-Track Timeline" },
-      te: { tut: "గైడ్", render: "4K రెండర్", assets: "פרוייקט ఆస్తులు", upload: "మీ మీడియాను జోడించండి", typography: "టెక్స్ట్ యానిమేషన్స్", transit: "ట్రాన్సిషన్స్ & ఫిల్టర్స్", inspector: "ఇన్‌స్పెక్టర్", timeline: "మల్టీ-ట్రాక్ టైమ్‌లైన్" },
-      es: { tut: "Guía", render: "Renderizar 4K", assets: "Activos", upload: "Importar Archivos", typography: "Tipografía", transit: "Transiciones", inspector: "Inspector", timeline: "Línea de tiempo" },
-      fr: { tut: "Guide", render: "Rendu 4K", assets: "Actifs", upload: "Importer", typography: "Typographie", transit: "Transitions", inspector: "Inspecteur", timeline: "Chronologie" },
-      de: { tut: "Anleitung", render: "4K Rendern", assets: "Assets", upload: "Medien Importieren", typography: "Typografie", transit: "Übergänge", inspector: "Inspektor", timeline: "Zeitleiste" },
-      zh: { tut: "指南", render: "渲染 4K", assets: "项目素材", upload: "导入媒体", typography: "動態文本", transit: "转场与滤镜", inspector: "属性检查器", timeline: "多轨道时间轴" },
-      ja: { tut: "ガイド", render: "4Kレンダリング", assets: "プロジェクト素材", upload: "メディアをインポート", typography: "テキストアニメ", transit: "トランジション", inspector: "インスペクター", timeline: "タイムライン" }
+      en: { render: "Render 4K", assets: "Project Assets", upload: "Import Local Media", typography: "Kinetic Typography", inspector: "Inspector", timeline: "Multi-Track Timeline" },
+      te: { render: "4K రెండర్", assets: "פרוייקט ఆస్తులు", upload: "మీ మీడియాను జోడించండి", typography: "టెక్స్ట్ యానిమేషన్స్", inspector: "ఇన్‌స్పెక్టర్", timeline: "మల్టీ-ట్రాక్ టైమ్‌లైన్" }
     };
 
     function changeLanguage(lang) {
       const t = translations[lang] || translations.en;
-      document.getElementById('ui-tut').innerText = t.tut;
       document.getElementById('ui-render').innerText = t.render;
       document.getElementById('lbl-assets').innerText = t.assets;
       document.getElementById('lbl-upload').innerText = t.upload;
       document.getElementById('lbl-typography').innerText = t.typography;
-      document.getElementById('lbl-transit').innerText = t.transit;
       document.getElementById('lbl-inspector').innerText = t.inspector;
       document.getElementById('lbl-timeline').innerText = t.timeline;
     }
 
-    // --- LEGACY COMPATIBLE APP STATE ---
     let state = {
-      isPlaying: false, currentTime: 0, selectedClipId: null,
       clips: [{ id: 'c1', name: 'Cyber City 4K', color: '#4f46e5' }]
     };
 
@@ -205,7 +155,6 @@
     }
 
     function selectClip(id) {
-      state.selectedClipId = id;
       document.getElementById('inspector-empty').classList.add('hidden');
       document.getElementById('inspector-content').classList.remove('hidden');
       document.getElementById('inspector-label').value = state.clips[0].name;
@@ -230,10 +179,13 @@
       }
     }
 
+    function switchTab(tab) {
+      document.getElementById('panel-media').classList.toggle('hidden', tab !== 'media');
+      document.getElementById('panel-text').classList.toggle('hidden', tab !== 'text');
+    }
+
     function togglePlayPause() { alert('Preview playing...'); }
     function openExportModal() { document.getElementById('export-modal').classList.remove('hidden'); }
-    function openTutorialModal() { alert('OmniStudio v3.0: Import clips, switch languages to Telugu/English, and render your video!'); }
-    function applyFx(type) { alert(type + ' effect applied live!'); }
     function addTextClip(name, anim) { state.clips.push({id: 't'+Date.now(), name: name, color: '#9333ea'}); renderTimeline(); }
   </script>
 </body>
